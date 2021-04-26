@@ -3,7 +3,10 @@ import "./EntryPage.css";
 
 class Experience extends React.Component {
   render() {
-    const { onChange, submitExperience } = this.props;
+    const { 
+      onChange, 
+      submitExperience 
+    } = this.props;
 
     return (
       <div>

@@ -3,7 +3,10 @@ import "./EntryPage.css";
 
 class Bio extends React.Component {
   render() {
-    const { onChange, savedBio } = this.props;
+    const { 
+      onChange, 
+      savedBio 
+    } = this.props;
     return (
       <div>
         <div className="FormHeader">

@@ -3,8 +3,11 @@ import "./EntryPage.css";
 
 class Eduction extends React.Component {
   render() {
-    const { onChange, submitEducation } = this.props;
-
+    const { 
+      onChange, 
+      submitEducation 
+    } = this.props;
+    
     return (
       <div>
         <div className="FormHeader">
