@@ -1,30 +1,26 @@
 import React from "react";
-import "./EntryPage.css";
+// import "./styles/EntryPage.css";
 
-class Bio extends React.Component {
-  render() {
-    const { 
-      onChange, 
-      savedBio 
-    } = this.props;
-    return (
-      <div>
-        <div className="FormHeader">
-          <p>Bio</p>
-        </div>
-        <div className="FormSection">
-          <input
-            className="BioInput"
-            id="Bio"
-            placeholder="Max Word Count: 250 "
-            onChange={onChange}
-            value={savedBio}
-          />
-          <p className="WordCountError"></p>
-        </div>
+const Bio = (props) => {
+  return (
+    <>
+      <div className="FormHeader">
+        <p>Bio</p>
       </div>
-    );
-  }
-}
+      <div className="FormSection">
+        <textarea
+          className="Bio"
+          name="Bio"
+          id="Bio"
+          placeholder="Max Word Count: 250 "
+          onChange={props.onChange}
+          value={props.savedBio}
+          type="text"
+        />
+        <p className="WordCountError"></p>
+      </div>
+    </>
+  );
+};
 
 export default Bio;
