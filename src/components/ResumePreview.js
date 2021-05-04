@@ -40,15 +40,15 @@ const ResumePreview = (props) => {
               return (
                 <div className="EducationContainer" key={uniqid()}>
                   <div className="DeleteRow">
-                    <span className="EducationDetail">{item.SchoolName}</span>
+                    <span className="EducationDetail">{item.schoolName}</span>
                     <i
                       className="fas fa-trash BlueTrashCan"
                       onClick={() => props.deleteEducation("Education", i)}
                     ></i>
                   </div>
-                  <span className="EducationDetail">{item.Major}</span>
-                  <span className="EducationDetail">{item.GraduationDate}</span>
-                  <span className="EducationDetail">GPA: {item.GPA}</span>
+                  <span className="EducationDetail">{item.major}</span>
+                  <span className="EducationDetail">{item.graduationDate}</span>
+                  <span className="EducationDetail">GPA: {item.gpa}</span>
                 </div>
               );
             })}
@@ -61,19 +61,19 @@ const ResumePreview = (props) => {
               return (
                 <div className="EducationContainer" key={uniqid()}>
                   <div className="DeleteRow">
-                    <span className="EducationDetail">{item.Employer}</span>
+                    <span className="EducationDetail">{item.employer}</span>
                     <i
                       id="DeleteEducation"
                       className="fas fa-trash BlueTrashCan"
                       onClick={() => props.deleteExperience("Experience", i)}
                     ></i>
                   </div>
-                  <span className="EducationDetail">{item.Title}</span>
+                  <span className="EducationDetail">{item.title}</span>
                   <span className="EducationDetail">
-                    Start Date: {item.StartDate}
+                    Start Date: {item.startDate}
                   </span>
                   <span className="EducationDetail">
-                    End Date: {item.EndDate}
+                    End Date: {item.endDate}
                   </span>
                 </div>
               );

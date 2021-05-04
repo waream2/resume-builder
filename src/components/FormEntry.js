@@ -1,5 +1,4 @@
 import React from "react";
-// import "./src/styles/EntryPage.css";
 import Profile from "./Profile";
 import Bio from "./Bio";
 import Education from "./Education";

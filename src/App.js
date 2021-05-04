@@ -1,152 +1,147 @@
 import React from "react";
 import ResumePreview from "./components/ResumePreview";
 import FormEntry from "./components/FormEntry";
+import { useState } from "react"
 
-class App extends React.Component {
-  constructor() {
-    super();
+const App = (props) => {
 
-    this.state = {
-      Experiences: [],
-      Experience: {
-        Employer: "",
-        Title: "",
-        StartDate: "",
-        EndDate: "",
-      },
-      Educations: [],
-      Education: {
-        SchoolName: "",
-        Major: "",
-        GraduationDate: "",
-        GPA: "",
-      },
-      Profile: {
-        FirstName: "",
-        LastName: "",
-        Email: "",
-        PhoneNumber: "",
-      },
-      Bio: {
-        Bio: "",
-      },
-      Preview: false,
-    };
-    this.toggle = this.toggle.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+    const [ experiences, setExperiences ] = useState([])
+    const [ educations, setEducations ] = useState([])
+    const [ firstName, setFirstName ] = useState('')
+    const [ lastName, setLastName ] = useState('')
+    const [ email, setEmail ] = useState('')
+    const [ phoneNumber, setPhoneNumber ] = useState('')
+    const [ bio, setBio ] = useState('')
+    const [ employer, setEmployer ] = useState('')
+    const [ title, setTitle ] = useState('')
+    const [ startDate, setStartDate ] = useState('')
+    const [ endDate, setEndDate ] = useState('')
+    const [ schoolName, setSchoolName ] = useState('')
+    const [ major, setMajor ] = useState('')
+    const [ graduationDate, setGraduationDate ] = useState('')
+    const [ gpa, setGpa ] = useState('')
+    const [ preview, setPreview ] = useState(false)
+    
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-  handleChange = (e) => {
-    const {
-      Profile: newProfile,
-      Bio: newBio,
-      Education: newEducation,
-      Experience: newExperience,
-    } = { ...this.state };
-    const { name, value, className } = e.target;
 
-    if (className === "Profile") {
-      newProfile[name] = value;
-    } else if (className === "Bio") {
-      newBio[name] = value;
-    } else if (className === "Education") {
-      newEducation[name] = value;
-    } else if (className === "Experience") newExperience[name] = value;
-
-    this.setState({
-      Profile: newProfile,
-      Bio: newBio,
-      Education: newEducation,
-      Experience: newExperience,
-    });
+    if (name === "FirstName") {
+      setFirstName(value);
+    } else if (name === "LastName") {
+      setLastName(value)
+    } else if (name === "Email") {
+      setEmail(value)
+    } else if (name === "PhoneNumber") {
+      setPhoneNumber(value)
+    } else if (name === "Bio") {
+      setBio(value)
+    } else if (name === "SchoolName") {
+      setSchoolName(value) 
+    } else if (name === "Major") {
+      setMajor(value) 
+    } else if (name === "GraduationDate") {
+      setGraduationDate(value) 
+    } else if (name === "GPA") {
+      setGpa(value) 
+    } else if (name === "SchoolName") {
+      setSchoolName(value) 
+    } else if (name === "Employer") {
+      setEmployer(value) 
+    } else if (name === "Title") {
+      setTitle(value) 
+    } else if (name === "StartDate") {
+      setStartDate(value) 
+    } else if (name === "EndDate") {
+      setEndDate(value) 
   };
+}
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    const { Educations: newEducations, Experiences: newExperiences } = {
-      ...this.state,
-    };
     const { id } = e.target;
 
     if (id === "EducationForm") {
-      newEducations.push(this.state.Education);
+      const bundledEducation = {
+        schoolName: schoolName,
+        major: major,
+        graduationDate: graduationDate,
+        gpa: gpa
+      };
+      setEducations(educations.concat(bundledEducation));
+      setSchoolName('')
+      setMajor('')
+      setStartDate('')
+      setGpa('')
+
     } else if (id === "ExperienceForm") {
-      newExperiences.push(this.state.Experience);
+      const bundledExperience = {
+        employer: employer,
+        title: title,
+        startDate: startDate,
+        endDate: endDate
+      };
+      setExperiences(experiences.concat(bundledExperience));
+        setEmployer('')
+        setTitle('')
+        setStartDate('')
+        setEndDate('')
     }
-
-    this.setState({
-      Educations: newEducations,
-      Education: {},
-      Experiences: newExperiences,
-      Experience: {},
-    });
   };
 
-  deleteItem = (itemType, i) => {
-    const {
-      Educations: filteredEducations,
-      Experiences: filteredExperiences,
-    } = { ...this.state };
+  const deleteItem = (itemType, i) => {
     if (itemType === "Education") {
-      filteredEducations.splice(i, 1);
-    } else filteredExperiences.splice(i, 1);
+      const tempEducations = [...educations]
+      tempEducations.splice(i, 1)
+      setEducations(tempEducations)
+    } else {
+      const tempExperiences = [...experiences]
+      tempExperiences.splice(i,1)
+      setExperiences(tempExperiences)
+  };
+}
 
-    this.setState({
-      Educations: filteredEducations,
-      Experiences: filteredExperiences,
-    });
+  const toggle = () => {
+    setPreview( preview === false ? true : false)
   };
 
-  toggle = () => {
-    if (this.state.Preview) {
-      this.setState({
-        Preview: false,
-      });
-    } else
-      this.setState({
-        Preview: true,
-      });
-  };
-
-  render() {
-    const { Preview } = this.state;
-
-    if (Preview) {
+    if (preview) {
       return (
         <ResumePreview
-          FirstName={this.state.Profile.FirstName}
-          LastName={this.state.Profile.LastName}
-          Email={this.state.Profile.Email}
-          PhoneNumber={this.state.Profile.PhoneNumber}
-          Bio={this.state.Bio.Bio}
-          Educations={this.state.Educations}
-          deleteEducation={this.deleteItem}
-          Experiences={this.state.Experiences}
-          deleteExperience={this.deleteItem}
-          editResume={this.toggle}
+          FirstName={firstName}
+          LastName={lastName}
+          Email={email}
+          PhoneNumber={phoneNumber}
+          Bio={bio}
+          Educations={educations}
+          deleteEducation={deleteItem}
+          Experiences={experiences}
+          deleteExperience={deleteItem}
+          editResume={toggle}
         />
       );
     } else {
-      return (
-        <FormEntry
-          handleProfileChange={this.handleChange}
-          handleBioChange={this.handleChange}
-          handleEducationChange={this.handleChange}
-          handleExperienceChange={this.handleChange}
-          onSubmitEducation={this.onSubmit}
-          onSubmitExperience={this.onSubmit}
-          previewResume={this.toggle}
-          savedFirstName={this.state.Profile.FirstName}
-          savedLastName={this.state.Profile.LastName}
-          savedEmail={this.state.Profile.Email}
-          savedPhoneNumber={this.state.Profile.PhoneNumber}
-          savedBio={this.state.Bio.Bio}
-        />
+        return (
+          <FormEntry
+            handleProfileChange={handleChange}
+            handleBioChange={handleChange}
+            handleEducationChange={handleChange}
+            handleExperienceChange={handleChange}
+            onSubmitEducation={onSubmit}
+            onSubmitExperience={onSubmit}
+            previewResume={toggle}
+            savedFirstName={firstName}
+            savedLastName={lastName}
+            savedEmail={email}
+            savedPhoneNumber={phoneNumber}
+            savedBio={bio}
+          />
       );
     }
   }
-}
+
+  
+  
+
 
 export default App;
