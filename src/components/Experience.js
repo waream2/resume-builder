@@ -52,10 +52,11 @@ const Experience = (props) => {
           <button id="ExperienceSubmit" className="SectionSubmit" type="submit">
             Submit
           </button>
-          <button id="resetExperience" className="ClearFormButton" type="reset">
+          <button id="resetExperience" className="ClearFormButton" type="reset" onClick={props.onClear}>
             Clear
           </button>
         </div>
+        <span className="ErrorCode">{props.experienceError}</span>
       </form>
     </>
   );

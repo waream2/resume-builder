@@ -1,6 +1,5 @@
 import React from "react";
 import uniqid from "uniqid";
-// import "./styles/EntryPage.css";
 
 const ResumePreview = (props) => {
   return (
@@ -38,7 +37,7 @@ const ResumePreview = (props) => {
           <>
             {props.Educations.map((item, i) => {
               return (
-                <div className="EducationContainer" key={uniqid()}>
+                <div className="EducationContainer" key={item.name+item.gpa}>
                   <div className="DeleteRow">
                     <span className="EducationDetail">{item.schoolName}</span>
                     <i

@@ -24,15 +24,20 @@ const FormEntry = (props) => {
           savedLastName={props.savedLastName}
           savedEmail={props.savedEmail}
           savedPhoneNumber={props.savedPhoneNumber}
+          profileError={props.profileError}
         />
         <Bio onChange={props.handleBioChange} savedBio={props.savedBio} />
         <Education
           onChange={props.handleEducationChange}
           submitEducation={props.onSubmitEducation}
+          educationError={props.educationError}
+          onClear = {props.onClear}
         />
         <Experience
           onChange={props.handleExperienceChange}
           submitExperience={props.onSubmitExperience}
+          experienceError={props.experienceError}
+          onClear = {props.onClear}
         />
       </div>
     </div>

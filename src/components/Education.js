@@ -43,14 +43,16 @@ const Education = (props) => {
           type="text"
           className="Education"
         ></input>
+        {props.EducationError}
         <div className="ButtonContainer">
           <button id="EducationSubmit" className="SectionSubmit" type="submit">
             Submit
           </button>
-          <button id="resetEducation" className="ClearFormButton" type="reset">
+          <button id="resetEducation" className="ClearFormButton" type="reset" onClick={props.onClear}>
             Clear
           </button>
         </div>
+        <span className="ErrorCode">{props.educationError}</span>
       </form>
     </>
   );

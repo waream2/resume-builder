@@ -19,8 +19,8 @@ const Profile = (props) => {
         <input
           name="LastName"
           placeholder="Last Name"
-          onChange={props.onChange}
           value={props.savedLastName}
+          onChange={props.onChange} 
           className="Profile"
           type="text"
         />
@@ -40,6 +40,7 @@ const Profile = (props) => {
           className="Profile"
           type="text"
         />
+        {props.profileError}
       </div>
     </form>
   );
