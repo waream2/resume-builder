@@ -2,7 +2,6 @@ import React from "react";
 import ResumePreview from "./components/ResumePreview";
 import FormEntry from "./components/FormEntry";
 import { useState } from "react";
-import _ from "lodash"
 
 const App = (props) => {
   const [experiences, setExperiences] = useState([]);
@@ -20,10 +19,8 @@ const App = (props) => {
   const [major, setMajor] = useState("");
   const [graduationDate, setGraduationDate] = useState("");
   const [gpa, setGpa] = useState("");
-  const [experienceError, setExperienceError] = useState("")
-  const [educationError, setEducationError ] = useState("")
   const [preview, setPreview] = useState(false);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -37,23 +34,23 @@ const App = (props) => {
       setPhoneNumber(value);
     } else if (name === "Bio") {
       setBio(value);
-    } else if (name === "SchoolName") {
+    } else if (name === "schoolName") {
       setSchoolName(value);
-    } else if (name === "Major") {
+    } else if (name === "major") {
       setMajor(value);
-    } else if (name === "GraduationDate") {
+    } else if (name === "graduationDate") {
       setGraduationDate(value);
-    } else if (name === "GPA") {
+    } else if (name === "gpa") {
       setGpa(value);
-    } else if (name === "SchoolName") {
+    } else if (name === "schoolName") {
       setSchoolName(value);
-    } else if (name === "Employer") {
+    } else if (name === "employer") {
       setEmployer(value);
-    } else if (name === "Title") {
+    } else if (name === "title") {
       setTitle(value);
-    } else if (name === "StartDate") {
+    } else if (name === "startDate") {
       setStartDate(value);
-    } else if (name === "EndDate") {
+    } else if (name === "endDate") {
       setEndDate(value);
     }
   };
@@ -63,42 +60,30 @@ const App = (props) => {
     const { id } = e.target;
 
     if (id === "EducationForm") {
-      if (schoolName === '' || major === '' || graduationDate === '' || gpa === '') {
-        setEducationError('Education Fields Cannot Be Blank')
-        return 
-      }
-      
       const bundledEducation = {
         schoolName,
         major,
         graduationDate,
-        gpa
+        gpa,
       };
-      educations.push(bundledEducation)
+      educations.push(bundledEducation);
       setEducations(educations);
       setSchoolName("");
       setMajor("");
       setGraduationDate("");
       setGpa("");
-      setEducationError("")
-
     } else if (id === "ExperienceForm") {
-      if (employer === '' || title === '' || startDate === '' || endDate === '') {
-        setExperienceError('Expereince Fields Cannot Be Blank')
-        return 
-      }
       const bundledExperience = {
         employer,
         title,
         startDate,
-        endDate
+        endDate,
       };
       setExperiences(experiences.concat(bundledExperience));
       setEmployer("");
       setTitle("");
       setStartDate("");
       setEndDate("");
-      setExperienceError("")
     }
   };
 
@@ -119,23 +104,17 @@ const App = (props) => {
   };
 
   const onClear = (e) => {
-    const { id } = e.target
-    if (id === "resetEducation" ) {
-
-      setEducationError("")
+    const { id } = e.target;
+    if (id === "resetEducation") {
       setSchoolName("");
       setMajor("");
       setGraduationDate("");
       setGpa("");
-    }
-    else 
-      setEmployer("");
-      setTitle("");
-      setStartDate("");
-      setEndDate("");
-      setExperienceError("")
-     
-  }
+    } else setEmployer("");
+    setTitle("");
+    setStartDate("");
+    setEndDate("");
+  };
 
   if (preview) {
     return (
@@ -167,9 +146,15 @@ const App = (props) => {
         savedEmail={email}
         savedPhoneNumber={phoneNumber}
         savedBio={bio}
-        educationError={educationError}
-        onClear = {onClear}
-        experienceError={experienceError}
+        onClear={onClear}
+        schoolName={schoolName}
+        major={major}
+        graduationDate={graduationDate}
+        gpa={gpa}
+        employer={employer}
+        title={title}
+        startDate={startDate}
+        endDate={endDate}
       />
     );
   }

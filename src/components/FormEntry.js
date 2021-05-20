@@ -31,13 +31,21 @@ const FormEntry = (props) => {
           onChange={props.handleEducationChange}
           submitEducation={props.onSubmitEducation}
           educationError={props.educationError}
-          onClear = {props.onClear}
+          onClear={props.onClear}
+          schoolName={props.schoolName}
+          major={props.major}
+          graduationDate={props.graduationDate}
+          gpa={props.gpa}
         />
         <Experience
           onChange={props.handleExperienceChange}
           submitExperience={props.onSubmitExperience}
           experienceError={props.experienceError}
-          onClear = {props.onClear}
+          onClear={props.onClear}
+          employer={props.employer}
+          title={props.title}
+          startDate={props.startDate}
+          endDate={props.endDate}
         />
       </div>
     </div>

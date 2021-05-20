@@ -37,7 +37,7 @@ const ResumePreview = (props) => {
           <>
             {props.Educations.map((item, i) => {
               return (
-                <div className="EducationContainer" key={item.name+item.gpa}>
+                <div className="EducationContainer" key={item.name + item.gpa}>
                   <div className="DeleteRow">
                     <span className="EducationDetail">{item.schoolName}</span>
                     <i

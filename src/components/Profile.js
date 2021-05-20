@@ -20,7 +20,7 @@ const Profile = (props) => {
           name="LastName"
           placeholder="Last Name"
           value={props.savedLastName}
-          onChange={props.onChange} 
+          onChange={props.onChange}
           className="Profile"
           type="text"
         />

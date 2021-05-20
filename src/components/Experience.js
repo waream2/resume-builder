@@ -1,7 +1,41 @@
 import React from "react";
+import { useState } from "react";
 // import "./styles/EntryPage.css";
 
 const Experience = (props) => {
+  const [experienceError, setExperienceError] = useState("");
+
+  const validateExperience = (e) => {
+    e.preventDefault();
+
+    if (
+      props.employer === "" &&
+      props.title === "" &&
+      props.startDate === "" &&
+      props.endDate === ""
+    ) {
+      setExperienceError("All Fields Must Have Values");
+    } else if (
+      props.employer.length === "" ||
+      props.employer.trim().length === 0
+    ) {
+      setExperienceError("Employer Can't Be Blank");
+    } else if (props.title === "" || props.title.trim().length === 0) {
+      setExperienceError("Title Can't Be Blank");
+    } else if (props.startDate === "" || props.startDate.trim().length === 0) {
+      setExperienceError("Start Date Can't Be Blank");
+    } else if (props.endDate === "" || props.endDate.trim().length === 0) {
+      setExperienceError("End Date Can't Be Blank");
+    } else {
+      props.submitExperience(e);
+      setExperienceError("");
+    }
+  };
+
+  const clearError = () => {
+    setExperienceError("");
+  };
+
   return (
     <>
       <div className="FormHeader">
@@ -10,40 +44,40 @@ const Experience = (props) => {
       <form
         className="FormSection"
         id="ExperienceForm"
-        onSubmit={props.submitExperience}
+        onSubmit={validateExperience}
       >
         <input
-          name="Employer"
+          name="employer"
           placeholder="Employer"
           onChange={props.onChange}
-          value={props.Employer}
+          value={props.employer}
           autoComplete="off"
           type="text"
           className="Experience"
         ></input>
         <input
-          name="Title"
+          name="title"
           placeholder="Title"
           onChange={props.onChange}
-          value={props.Title}
+          value={props.title}
           autoComplete="off"
           type="text"
           className="Experience"
         ></input>
         <input
-          name="StartDate"
+          name="startDate"
           placeholder="Start Date"
           onChange={props.onChange}
-          value={props.StartDate}
+          value={props.startDate}
           autoComplete="off"
           type="text"
           className="Experience"
         ></input>
         <input
-          name="EndDate"
+          name="endDate"
           placeholder="End Date (if still employed, enter Current)"
           onChange={props.onChange}
-          value={props.EndDate}
+          value={props.endDate}
           autoComplete="off"
           type="text"
           className="Experience"
@@ -52,11 +86,16 @@ const Experience = (props) => {
           <button id="ExperienceSubmit" className="SectionSubmit" type="submit">
             Submit
           </button>
-          <button id="resetExperience" className="ClearFormButton" type="reset" onClick={props.onClear}>
+          <button
+            id="resetExperience"
+            className="ClearFormButton"
+            type="reset"
+            onClick={(props.onClear, clearError)}
+          >
             Clear
           </button>
         </div>
-        <span className="ErrorCode">{props.experienceError}</span>
+        <span className="ErrorCode">{experienceError}</span>
       </form>
     </>
   );

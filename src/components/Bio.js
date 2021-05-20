@@ -1,5 +1,4 @@
 import React from "react";
-// import "./styles/EntryPage.css";
 
 const Bio = (props) => {
   return (
