@@ -1,7 +1,37 @@
 import React from "react";
-// import "./styles/EntryPage.css";
+import MaskedPhoneNumber from "./phoneInput";
+import { useState, useEffect } from "react";
 
 const Profile = (props) => {
+  const [firstNameSatisfied, setFirstNameSatisfied] = useState(true);
+  const [lastNameSatisfied, setLastNameSatisfied] = useState(true);
+  const [emailError, setEmailError] = useState("");
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    props.onChange(e);
+    if (name === "FirstName") {
+      if (value.length > 2) {
+        setFirstNameSatisfied(true);
+      } else if (value.length < 2) setFirstNameSatisfied(false);
+    } else if (name === "LastName") {
+      if (value.length > 2) {
+        setLastNameSatisfied(true);
+      } else if (value.length < 2) {
+        setLastNameSatisfied(false);
+      }
+    }
+  };
+
+  const validateEmail = (e) => {
+    const { value } = e.target;
+    if (!value.includes("@") || !value.includes(".")) {
+      setEmailError("Must be a valid email");
+    } else {
+      setEmailError("");
+    }
+  };
+
   return (
     <form id="Profile">
       <div className="FormHeader">
@@ -11,36 +41,36 @@ const Profile = (props) => {
         <input
           name="FirstName"
           placeholder="First Name"
-          onChange={props.onChange}
+          onChange={onChange}
           value={props.savedFirstName}
-          className="Profile"
+          className={firstNameSatisfied ? "Profile" : "Bad-Profile"}
+          outline="none"
           type="text"
         />
         <input
           name="LastName"
           placeholder="Last Name"
           value={props.savedLastName}
-          onChange={props.onChange}
-          className="Profile"
+          onChange={onChange}
+          className={lastNameSatisfied ? "Profile" : "Bad-Profile"}
           type="text"
         />
+
         <input
           name="Email"
           placeholder="Email"
           onChange={props.onChange}
           value={props.savedEmail}
-          className="Profile"
+          className="Email"
           type="text"
+          onBlur={validateEmail}
         />
-        <input
-          name="PhoneNumber"
-          placeholder="Phone Number"
+        <span className="ErrorCode">{emailError}</span>
+
+        <MaskedPhoneNumber
           onChange={props.onChange}
-          value={props.savedPhoneNumber}
-          className="Profile"
-          type="text"
+          savedPhoneNumber={props.savedPhoneNumber}
         />
-        {props.profileError}
       </div>
     </form>
   );

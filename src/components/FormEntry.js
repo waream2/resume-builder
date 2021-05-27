@@ -25,6 +25,7 @@ const FormEntry = (props) => {
           savedEmail={props.savedEmail}
           savedPhoneNumber={props.savedPhoneNumber}
           profileError={props.profileError}
+
         />
         <Bio onChange={props.handleBioChange} savedBio={props.savedBio} />
         <Education

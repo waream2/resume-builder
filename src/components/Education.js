@@ -1,42 +1,65 @@
 import React from "react";
 import { useState } from "react";
-// import "./styles/EntryPage.css";
+
+const isThisEmpty = (field) => {
+  if (field.trim().length === 0) {
+    return true;
+  }
+};
 
 const Education = (props) => {
-  const [educationError, setEducationError] = useState("");
+  const [schoolNameError, setSchoolNameError] = useState("");
+  const [majorError, setMajorError] = useState("");
+  const [graduationDateError, setGraduationDateError] = useState("");
+  const [gpaError, setGpaError] = useState("");
+  const [submissionError, setSubmissionError] = useState("");
 
-  const validateEducation = (e) => {
-    e.preventDefault();
+  const validateField = (e) => {
+    const { value, name } = e.target;
 
-    if (
-      props.schoolName === "" &&
-      props.major === "" &&
-      props.graduationDate === "" &&
-      props.gpa === ""
-    ) {
-      setEducationError("All Fields Must Have Values");
-    } else if (
-      props.schoolName.length === "" ||
-      props.schoolName.trim().length === 0
-    ) {
-      setEducationError("School Name Can't Be Blank");
-    } else if (props.major === "" || props.major.trim().length === 0) {
-      setEducationError("Major Can't Be Blank");
-    } else if (
-      props.graduationDate === "" ||
-      props.graduationDate.trim().length === 0
-    ) {
-      setEducationError("Graduation Date Can't Be Blank");
-    } else if (props.gpa === "" || props.gpa.trim().length === 0) {
-      setEducationError("GPA Can't Be Blank");
-    } else {
-      props.submitEducation(e);
-      setEducationError("");
+    if (isThisEmpty(value)) {
+      if (name === "schoolName") {
+        setSchoolNameError("Empty School Name");
+      } else if (name === "major") {
+        setMajorError("Empty Major");
+      } else if (name === "graduationDate") {
+        setGraduationDateError("Empty Date");
+      } else if (name === "gpa") {
+        setGpaError("Empty GPA");
+      }
+    } else if (!isThisEmpty(value)) {
+      if (name === "schoolName") {
+        setSchoolNameError("");
+      } else if (name === "major") {
+        setMajorError("");
+      } else if (name === "graduationDate") {
+        setGraduationDateError("");
+      } else if (name === "gpa") {
+        setGpaError("");
+      }
     }
   };
 
-  const clearError = () => {
-    setEducationError("");
+  const submitIfValidated = (e) => {
+    e.preventDefault();
+    if (
+      props.schoolName !== "" &&
+      props.major !== "" &&
+      props.graduationDate !== "" &&
+      props.gpa !== ""
+    ) {
+      props.submitEducation(e);
+      setSubmissionError("");
+    } else setSubmissionError("Can't Not Submit With Blank Fields");
+  };
+
+  const clearErrors = (e) => {
+    props.onClear(e);
+    setGpaError("");
+    setSchoolNameError("");
+    setMajorError("");
+    setGraduationDateError("");
+    setSubmissionError("");
   };
 
   return (
@@ -47,7 +70,7 @@ const Education = (props) => {
       <form
         className="FormSection"
         id="EducationForm"
-        onSubmit={validateEducation}
+        onSubmit={submitIfValidated}
       >
         <input
           name="schoolName"
@@ -55,7 +78,10 @@ const Education = (props) => {
           onChange={props.onChange}
           value={props.schoolName}
           className="Education"
+          onBlur={validateField}
+          autoComplete="off"
         ></input>
+        <span className="ErrorCode">{schoolNameError}</span>
         <input
           name="major"
           placeholder="Major"
@@ -63,7 +89,10 @@ const Education = (props) => {
           value={props.major}
           type="text"
           className="Education"
+          onBlur={validateField}
+          autoComplete="off"
         ></input>
+        <span className="ErrorCode">{majorError}</span>
         <input
           name="graduationDate"
           placeholder="Graduation Date"
@@ -71,7 +100,10 @@ const Education = (props) => {
           value={props.graduationDate}
           type="text"
           className="Education"
+          onBlur={validateField}
+          autoComplete="off"
         ></input>
+        <span className="ErrorCode">{graduationDateError}</span>
         <input
           name="gpa"
           placeholder="GPA"
@@ -79,7 +111,10 @@ const Education = (props) => {
           value={props.gpa}
           type="text"
           className="Education"
+          onBlur={validateField}
+          autoComplete="off"
         ></input>
+        <span className="ErrorCode">{gpaError}</span>
 
         <div className="ButtonContainer">
           <button id="EducationSubmit" className="SectionSubmit" type="submit">
@@ -89,12 +124,12 @@ const Education = (props) => {
             id="resetEducation"
             className="ClearFormButton"
             type="reset"
-            onClick={(props.onClear, clearError)}
+            onClick={clearErrors}
           >
             Clear
           </button>
         </div>
-        <span className="ErrorCode">{educationError}</span>
+        <span className="ErrorCode">{submissionError}</span>
       </form>
     </>
   );

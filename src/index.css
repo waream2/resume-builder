@@ -98,7 +98,7 @@ h3 {
 
 input {
     height: 35px;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
     border-radius: 5px;
     border: none;
     font-weight: bold;
@@ -213,8 +213,24 @@ input {
 }
 
 .ErrorCode {
-    padding-top: 5px;
-    font-size: 25px;
+    margin-bottom: 25px;
+    font-size: 15px;
     color: red;
 }
 
+.Profile {
+    margin-bottom: 25px
+}
+
+.Email {
+    margin-bottom: 0px;
+}
+.Bad-Profile {
+    margin-bottom: 25px;
+    border: solid;
+    border-color: red;
+}
+
+input:focus {
+    outline: none !important;
+}

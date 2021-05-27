@@ -135,6 +135,7 @@ const App = (props) => {
     return (
       <FormEntry
         handleProfileChange={handleChange}
+        onChange={handleChange}
         handleBioChange={handleChange}
         handleEducationChange={handleChange}
         handleExperienceChange={handleChange}
@@ -155,6 +156,7 @@ const App = (props) => {
         title={title}
         startDate={startDate}
         endDate={endDate}
+        onPhoneChange={handleChange}
       />
     );
   }
