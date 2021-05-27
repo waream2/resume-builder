@@ -17,7 +17,7 @@ const FormEntry = (props) => {
           Preview
         </button>
       </div>
-      <div className="SubBody">
+      <div className='SubBody'>
         <Profile
           onChange={props.handleProfileChange}
           savedFirstName={props.savedFirstName}

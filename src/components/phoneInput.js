@@ -13,7 +13,7 @@ const MaskedPhoneNumber = (props) => {
 
   return (
     <InputMask
-      mask="(999) 999-9999"
+      mask='(999) 999-9999'
       maskChar={null}
       value={props.savedPhoneNumber}
       onChange={onChange}

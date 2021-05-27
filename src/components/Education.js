@@ -81,7 +81,7 @@ const Education = (props) => {
           onBlur={validateField}
           autoComplete="off"
         ></input>
-        <span className="ErrorCode">{schoolNameError}</span>
+        <span className='ErrorCode'>{schoolNameError}</span>
         <input
           name="major"
           placeholder="Major"

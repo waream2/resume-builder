@@ -25,7 +25,7 @@ const Profile = (props) => {
 
   const validateEmail = (e) => {
     const { value } = e.target;
-    if (!value.includes("@") || !value.includes(".")) {
+    if (!value.includes('@') || !value.includes(".")) {
       setEmailError("Must be a valid email");
     } else {
       setEmailError("");
